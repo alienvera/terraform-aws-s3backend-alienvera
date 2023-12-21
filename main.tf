@@ -1,6 +1,6 @@
 
 provider "aws" {
-  region = "us-west-2
+  region = "us-est-1"
 }
 
 data "aws_region" "current" {}
@@ -44,7 +44,7 @@ resource "aws_kms_key" "kms_key" {
 resource "aws_s3_bucket" "s3_bucket" {
   bucket        = "${local.namespace}-state-bucket"
   force_destroy = var.force_destroy_state
-  }
+
 
   tags = {
     ResourceGroup = local.namespace
@@ -62,11 +62,11 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "s3_serverside_enc
   bucket = aws_s3_bucket.s3_bucket.id
 
   rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm     = "aws:kms"
-        kms_master_key_id = aws_kms_key.kms_key.arn
-      }
+    apply_server_side_encryption_by_default {
+      sse_algorithm     = "aws:kms"
+      kms_master_key_id = aws_kms_key.kms_key.arn
     }
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "s3_bucket" {
