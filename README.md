@@ -22,7 +22,7 @@ A reusable module to provision a secure, flexible Terraform backend in AWS using
 
 ```hcl
 module "backend" {
-  source  = "alienvera/s3backend/aws"
+  source  = "alienvera/s3backend-alienvera/aws"
   version = "2.0.0"
 
   namespace         = "velocivtech"
